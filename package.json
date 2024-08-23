@@ -3,8 +3,11 @@
   "version": "1.0.0",
   "main": "index.js",
   "repository": "https://github.com/Hanxbeen/pulley.git",
-  "author": "Hanbeen Jo <hanbeen.jo@tridge.com>",
+  "author": "Hanbeen Jo",
   "license": "MIT",
+  "scripts": {
+    "start": "webpack serve --mode development"
+  },
   "dependencies": {
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
