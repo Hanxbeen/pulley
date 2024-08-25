@@ -140,7 +140,7 @@ const ProblemManager: React.FC = () => {
       );
       setStudyDetailProblems(updatedProblems);
       setSimilarProblems(similarProblems.filter(p => p.id !== replacementProblem.id));
-      setSelectedProblemId(replacementProblem.id); 
+      setSelectedProblemId(replacementProblem.id);
 
       handleSimilarProblemsClick(replacementProblem.id);
     }
@@ -177,7 +177,7 @@ const ProblemManager: React.FC = () => {
                 >
                   유사 문항
                 </Text>
-                <ScrollContainer height="900px">
+                <ScrollContainer height='900px'>
                   <Stack vertical gap="16px">
                     {similarProblems.map((problem, index) => (
                       <Card
@@ -290,80 +290,97 @@ const ProblemManager: React.FC = () => {
               학습지 상세 편집
             </Text>
             <ScrollContainer height="836px">
-              <Stack vertical gap="16px">
-                {studyDetailProblems.map((problem: Problem, index: number) => (
-                  <Card
-                    key={problem.id}
-                    active={selectedProblemId === problem.id}
-                    renderHeader={() => (
-                      <CardHeaderWrapper>
-                        <Stack distribution="space-between">
-                          <Stack gap="32px" alignment='center'>
-                            <Text
-                              typography='h4'
-                              color='black'
-                              weight='semiBold'
-                            >
-                              {index + 1}
-                            </Text>
-                            <Text
-                              typography='body2'
-                              color='black'
-                            >
-                              {problem.title}
-                            </Text>
-                          </Stack>
-                          <ButtonGroup>
-                            <Stack gap="12px">
-                              <IconButton
-                                variant="plain"
-                                color="lightGray"
-                                hoverColor="primary"
-                                name='add-circle'
-                                onClick={() => handleSimilarProblemsClick(problem.id)}
-                              >
-                                유사 문제
-                              </IconButton>
-                              <IconButton
-                                variant="plain"
-                                color="lightGray"
-                                hoverColor="alert"
-                                name="delete"
-                                onClick={() => handleDeleteProblemFromList(problem.id, 'studyDetail')}
-                              >
-                                삭제
-                              </IconButton>
+
+              {
+                studyDetailProblems.length > 0
+                  ? (
+                    studyDetailProblems.map((problem: Problem, index: number) => (
+                      <Stack vertical gap="16px">
+                        <Card
+                          key={problem.id}
+                          active={selectedProblemId === problem.id}
+                          renderHeader={() => (
+                            <CardHeaderWrapper>
+                              <Stack distribution="space-between">
+                                <Stack gap="32px" alignment='center'>
+                                  <Text
+                                    typography='h4'
+                                    color='black'
+                                    weight='semiBold'
+                                  >
+                                    {index + 1}
+                                  </Text>
+                                  <Text
+                                    typography='body2'
+                                    color='black'
+                                  >
+                                    {problem.title}
+                                  </Text>
+                                </Stack>
+                                <ButtonGroup>
+                                  <Stack gap="12px">
+                                    <IconButton
+                                      variant="plain"
+                                      color="lightGray"
+                                      hoverColor="primary"
+                                      name='add-circle'
+                                      onClick={() => handleSimilarProblemsClick(problem.id)}
+                                    >
+                                      유사 문제
+                                    </IconButton>
+                                    <IconButton
+                                      variant="plain"
+                                      color="lightGray"
+                                      hoverColor="alert"
+                                      name="delete"
+                                      onClick={() => handleDeleteProblemFromList(problem.id, 'studyDetail')}
+                                    >
+                                      삭제
+                                    </IconButton>
+                                  </Stack>
+                                </ButtonGroup>
+                              </Stack>
+                            </CardHeaderWrapper>
+                          )}
+                          renderBody={() => (
+                            <Stack gap="16px">
+                              <Stack gap="8px" vertical>
+                                <LevelBadge level={problem.level} />
+                                <Badge>
+                                  <Text typography='caption1' color="gray">
+                                    {`${problem.answerRate}%`}
+                                  </Text>
+                                </Badge>
+                                <Badge>
+                                  <Text typography='caption1' color="lightGray">
+                                    {problem.type === 1 ? "객관식" : "주관식"}
+                                  </Text>
+                                </Badge>
+                              </Stack>
+                              {problem.problemImageUrl && (
+                                <ProblemImg
+                                  src={problem.problemImageUrl}
+                                  alt={problem.title}
+                                />
+                              )}
                             </Stack>
-                          </ButtonGroup>
-                        </Stack>
-                      </CardHeaderWrapper>
-                    )}
-                    renderBody={() => (
-                      <Stack gap="16px">
-                        <Stack gap="8px" vertical>
-                          <LevelBadge level={problem.level} />
-                          <Badge>
-                            <Text typography='caption1' color="gray">
-                              {`${problem.answerRate}%`}
-                            </Text>
-                          </Badge>
-                          <Badge>
-                            <Text typography='caption1' color="lightGray">
-                              {problem.type === 1 ? "객관식" : "주관식"}
-                            </Text>
-                          </Badge>
-                        </Stack>
-                        {problem.problemImageUrl && (
-                          <ProblemImg
-                            src={problem.problemImageUrl}
-                            alt={problem.title}
-                          />
-                        )}
+                          )}
+                        />
                       </Stack>
-                    )}
-                  />
-                ))}
-              </Stack>
+                    ))
+                  ) : (
+                    <InfoBoxEmptyState>
+                      <Stack vertical gap="8px" alignment="center" distribution="center">
+                        <Text typography="body2" color='white'>
+                          학습지 문제수가 없습니다.
+                        </Text>
+                        <Text typography="body2" color='white'>
+                          다음단계로 넘어가기 위해 문제를 추가해주세요.
+                        </Text>
+                      </Stack>
+                    </InfoBoxEmptyState>
+                  )
+              }
             </ScrollContainer>
           </Stack>
           <Summary>
