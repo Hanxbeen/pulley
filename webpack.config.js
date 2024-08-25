@@ -23,10 +23,29 @@ module.exports = {
           loader: 'babel-loader',
         },
       },
+      {
+        test: /\.(png|jpe?g|gif)$/i,
+        type: 'asset/resource',
+      },
+      {
+        test: /\.svg$/,
+        use: {
+          loader: 'file-loader',
+          options: {
+            name: '[path][name].[ext]',
+            context: path.resolve(__dirname, 'src'),
+            emitFile: true,
+          },
+        },
+      },
     ],
   },
   resolve: {
-    extensions: ['.ts', '.tsx', '.js', '.jsx'],
+    extensions: ['.js', '.jsx', '.ts', '.tsx', '.png', '.jpg', '.jpeg', '.gif', '.svg'],
+    alias: {
+      components: path.resolve(__dirname, 'src/components'),
+      styles: path.resolve(__dirname, 'src/styles'),
+    },
   },
   plugins: [
     new HtmlWebpackPlugin({
