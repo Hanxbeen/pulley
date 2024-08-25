@@ -59,16 +59,9 @@ const InfoBoxEmptyState = styled.div`
   text-align: center;
 `;
 
-const StudyDetailCard = styled(Card) <{ selected: boolean }>`
-  ${({ theme, selected }) =>
-    selected
-      ? `
-      border: 3px solid ${theme.colors.primary};
-    `
-      : `
-      border: none;
-    `
-  }
+const ButtonGroup = styled.div`
+  min-width: 110px;
+  display: flex;
 `;
 
 const StudyDetail = styled.div`
@@ -96,6 +89,7 @@ const CardHeaderWrapper = styled.div`
   padding-right: 16px;
   padding-left: 28px;
   height: 52px;
+  background-color: ${({ theme }) => theme.colors.onSurface};
 `;
 
 const ProblemManager: React.FC = () => {
@@ -146,9 +140,8 @@ const ProblemManager: React.FC = () => {
       );
       setStudyDetailProblems(updatedProblems);
       setSimilarProblems(similarProblems.filter(p => p.id !== replacementProblem.id));
-      setSelectedProblemId(replacementProblem.id);  // 교체 후 새 문제를 선택 상태로 유지
+      setSelectedProblemId(replacementProblem.id); 
 
-      // 새로운 유사 문제 리스트를 가져옴
       handleSimilarProblemsClick(replacementProblem.id);
     }
   };
@@ -191,7 +184,7 @@ const ProblemManager: React.FC = () => {
                         key={problem.id}
                         renderHeader={() => (
                           <CardHeaderWrapper>
-                            <Stack distribution="space-between">
+                            <Stack distribution="space-between" gap="16px">
                               <Stack gap="32px" alignment='center'>
                                 <Text
                                   typography='h4'
@@ -207,26 +200,28 @@ const ProblemManager: React.FC = () => {
                                   {problem.title}
                                 </Text>
                               </Stack>
-                              <Stack gap="12px">
-                                <IconButton
-                                  variant="plain"
-                                  color="lightGray"
-                                  hoverColor="primary"
-                                  name='swap-horiz'
-                                  onClick={() => handleReplaceProblem(problem)}
-                                >
-                                  교체
-                                </IconButton>
-                                <IconButton
-                                  variant="plain"
-                                  color="lightGray"
-                                  hoverColor="alert"
-                                  name="delete"
-                                  onClick={() => handleDeleteProblemFromList(problem.id, 'similar')}
-                                >
-                                  삭제
-                                </IconButton>
-                              </Stack>
+                              <ButtonGroup>
+                                <Stack gap="12px">
+                                  <IconButton
+                                    variant="plain"
+                                    color="lightGray"
+                                    hoverColor="primary"
+                                    name='swap-horiz'
+                                    onClick={() => handleReplaceProblem(problem)}
+                                  >
+                                    교체
+                                  </IconButton>
+                                  <IconButton
+                                    variant="plain"
+                                    color="lightGray"
+                                    hoverColor="alert"
+                                    name="delete"
+                                    onClick={() => handleDeleteProblemFromList(problem.id, 'similar')}
+                                  >
+                                    삭제
+                                  </IconButton>
+                                </Stack>
+                              </ButtonGroup>
                             </Stack>
                           </CardHeaderWrapper>
                         )}
@@ -318,26 +313,28 @@ const ProblemManager: React.FC = () => {
                               {problem.title}
                             </Text>
                           </Stack>
-                          <Stack gap="12px">
-                            <IconButton
-                              variant="plain"
-                              color="lightGray"
-                              hoverColor="primary"
-                              name='add-circle'
-                              onClick={() => handleSimilarProblemsClick(problem.id)}
-                            >
-                              유사 문제
-                            </IconButton>
-                            <IconButton
-                              variant="plain"
-                              color="lightGray"
-                              hoverColor="alert"
-                              name="delete"
-                              onClick={() => handleDeleteProblemFromList(problem.id, 'studyDetail')}
-                            >
-                              삭제
-                            </IconButton>
-                          </Stack>
+                          <ButtonGroup>
+                            <Stack gap="12px">
+                              <IconButton
+                                variant="plain"
+                                color="lightGray"
+                                hoverColor="primary"
+                                name='add-circle'
+                                onClick={() => handleSimilarProblemsClick(problem.id)}
+                              >
+                                유사 문제
+                              </IconButton>
+                              <IconButton
+                                variant="plain"
+                                color="lightGray"
+                                hoverColor="alert"
+                                name="delete"
+                                onClick={() => handleDeleteProblemFromList(problem.id, 'studyDetail')}
+                              >
+                                삭제
+                              </IconButton>
+                            </Stack>
+                          </ButtonGroup>
                         </Stack>
                       </CardHeaderWrapper>
                     )}
@@ -382,7 +379,7 @@ const ProblemManager: React.FC = () => {
                 <Text typography="body1" color="gray" inline>
                   {" | "}
                 </Text>
-                <Text typography="body1" weight="bold" color="gray" inline>
+                <Text typography="body1" weight="bold" color="white" inline>
                   문제 수 {studyDetailProblems.length} 개
                 </Text>
               </>

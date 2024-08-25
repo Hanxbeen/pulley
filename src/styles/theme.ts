@@ -11,6 +11,7 @@ export interface Theme {
     alert: string;
     warning: string;
     positive: string;
+    onSurface: string;
   };
   typography: {
     h1: {
@@ -67,6 +68,7 @@ export const theme: Theme = {
     alert: '#FD5354',
     warning: '#ff9800',
     positive: '#54C0B1',
+    onSurface: '#FAFAFA',
   },
   typography: {
     h1: {

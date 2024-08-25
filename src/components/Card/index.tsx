@@ -11,7 +11,8 @@ interface CardProps {
 
 const CardContainer = styled.div<{ active?: boolean, borderColor?: keyof DefaultTheme['colors']; backgroundColor?: keyof DefaultTheme['colors'] }>`
   background-color: ${({ theme, backgroundColor }) => backgroundColor ? theme.colors[backgroundColor] : theme.colors.white};
-  border-radius: 8px;
+  border-radius: 12px;
+  overflow: hidden;
   border: 1px solid ${({ theme, borderColor }) => borderColor ? theme.colors[borderColor] : theme.colors.gray};
   margin-bottom: 16px;
   ${({ theme, active }) =>
