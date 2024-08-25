@@ -1,0 +1,4 @@
+<!-- statics/svgs/delete.svg -->
+<svg xmlns="http://www.w3.org/2000/svg" width="10" height="12" viewBox="0 0 10 12" fill="none">
+  <path d="M1 10.6667C1 11.4 1.6 12 2.33333 12H7.66667C8.4 12 9 11.4 9 10.6667V2.66667H1V10.6667ZM9.66667 0.666667H7.33333L6.66667 0H3.33333L2.66667 0.666667H0.333333V2H9.66667V0.666667Z" fill="#C0C0C0" fill-opacity="0.87"/>
+</svg>
